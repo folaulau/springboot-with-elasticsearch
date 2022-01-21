@@ -5,4 +5,5 @@ import java.util.List;
 public interface UserService {
 
     List<User> getUsersByFirstName(String firstName);
+    List<User> getUsersByLastName(String lastName);
 }

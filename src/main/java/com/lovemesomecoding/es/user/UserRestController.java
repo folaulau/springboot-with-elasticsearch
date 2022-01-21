@@ -30,10 +30,17 @@ public class UserRestController {
     @Autowired
     private UserService userService;
 
-    @Operation(summary = "Get Users", description = "Get Users")
-    @GetMapping
-    public ResponseEntity<List<User>> getUsers(@RequestParam String firstName) {
-        log.info("getUsers firstName={}", firstName);
+    @Operation(summary = "Get Users By First Name", description = "Get Users By First Name")
+    @GetMapping("/firstname")
+    public ResponseEntity<List<User>> getUsersByFirstName(@RequestParam String firstName) {
+        log.info("getUsersByFirstName firstName={}", firstName);
         return new ResponseEntity<>(userService.getUsersByFirstName(firstName), OK);
+    }
+
+    @Operation(summary = "Get Users By Last Name", description = "Get Users By Last Name")
+    @GetMapping("/lastName")
+    public ResponseEntity<List<User>> getUsersByLastName(@RequestParam String lastName) {
+        log.info("getUsersByLastName lastName={}", lastName);
+        return new ResponseEntity<>(userService.getUsersByLastName(lastName), OK);
     }
 }

@@ -119,4 +119,9 @@ public class UserDAOImp implements UserDAO {
         return searchResults;
 
     }
+
+    @Override
+    public List<User> getUsersByLastName(String lastName) {
+        return userRepository.findByLastName(lastName);
+    }
 }

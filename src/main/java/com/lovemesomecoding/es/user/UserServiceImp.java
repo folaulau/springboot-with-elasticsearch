@@ -29,4 +29,10 @@ public class UserServiceImp implements UserService {
         return userDAO.getUsersByFirstName(firstName);
     }
 
+    @Override
+    public List<User> getUsersByLastName(String lastName) {
+        // TODO Auto-generated method stub
+        return userDAO.getUsersByLastName(lastName);
+    }
+
 }
