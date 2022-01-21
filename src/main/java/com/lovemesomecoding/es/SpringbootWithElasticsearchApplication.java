@@ -39,6 +39,8 @@ public class SpringbootWithElasticsearchApplication {
                 System.out.println("** Timezone: " + timeZone.getID());
                 System.out.println("** TimeStamp: " + new Date().toInstant().toString());
 
+                System.out.println("** Internal Swagger: http://localhost:" + env.getProperty("server.port") + "/swagger-ui.html");
+
                 System.out.println("************************* Java - JVM *********************************");
                 System.out.println("** Number of processors: " + runtime.availableProcessors());
                 String processName = ManagementFactory.getRuntimeMXBean().getName();
