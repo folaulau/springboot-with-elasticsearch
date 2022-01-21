@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonInclude(value = Include.NON_NULL)
 @JsonAutoDetect(fieldVisibility = Visibility.ANY)
-@Document(indexName = "user")
+@Document(indexName = "sb_with_es_user")
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
