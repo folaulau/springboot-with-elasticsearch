@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.6.3</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.lovemesomecoding</groupId>
 	<artifactId>springboot-with-elasticsearch</artifactId>
@@ -14,6 +15,8 @@
 	<name>springboot-with-elasticsearch</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
+		<org.mapstruct.version>1.2.0.Final</org.mapstruct.version>
+		<org.projectlombok.version>1.18.10</org.projectlombok.version>
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
@@ -25,7 +28,44 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math3</artifactId>
+			<version>3.6</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.8.0</version>
+		</dependency>
 
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct-jdk8</artifactId>
+			<version>${org.mapstruct.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct-processor</artifactId>
+			<version>${org.mapstruct.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -38,8 +78,53 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
 			</plugin>
+			<!-- mapstruct plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>11</source>
+					<target>11</target>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>${org.mapstruct.version}</version>
+						</path>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${org.projectlombok.version}</version>
+						</path>
+					</annotationProcessorPaths>
+					<compilerArgs>
+						<compilerArg>
+							-Amapstruct.suppressGeneratorTimestamp=true
+						</compilerArg>
+						<compilerArg>
+							-Amapstruct.suppressGeneratorVersionInfoComment=true
+						</compilerArg>
+					</compilerArgs>
+				</configuration>
+			</plugin>
+			<!-- use profile instead - https://github.com/folaulau/cicd-with-aws-elb/blob/main/pom.xml -->
+			<!-- <plugin> <artifactId>exec-maven-plugin</artifactId> <groupId>org.codehaus.mojo</groupId> 
+				<executions> <execution> <id>run-hasura-configs</id> <phase>package</phase> 
+				<goals> <goal>exec</goal> </goals> </execution> </executions> <configuration> 
+				<executable>${basedir}/apply-hasura-metadata.sh</executable> </configuration> 
+				</plugin> -->
 		</plugins>
+
+		<finalName>learnmymath-api</finalName>
 	</build>
 
 </project>
